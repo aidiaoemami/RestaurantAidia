@@ -20,6 +20,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.restaurant.aidia.DashboardActivity;
 import com.restaurant.aidia.R;
 import com.restaurant.aidia.data.Session;
+import com.restaurant.aidia.model.Login;
 import com.restaurant.aidia.model.LoginResponse;
 import com.restaurant.aidia.utils.DialogUtils;
 
@@ -36,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Session session;
-    String mUsername = "", mPassword = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (response instanceof LoginResponse) {
                     LoginResponse res = (LoginResponse) response;
                     if (res.getStatus().equals("success")) {
+                        String userId = email.getText().toString();
                         session.setIsLogin(true);
+                        session.setUserId(userId);
                         loginCheck();
                     } else {
                         Toast.makeText(LoginActivity.this, "Email atau Username Salah", Toast.LENGTH_SHORT).show();
@@ -104,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginCheck() {
         if (session.isLoggedIn()) {
             Intent i = new Intent(this, DashboardActivity.class);
+            i.putExtra("EXTRA_SESSION_ID", email.getText().toString());
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);

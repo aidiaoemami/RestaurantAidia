@@ -2,17 +2,17 @@ package com.restaurant.aidia.model;
 
 import com.google.gson.annotations.Expose;
 
-public class LoginResponse {
+public class RestoranResponse {
     @Expose
-    private Login data;
+    private String data;
     @Expose
     private String message;
     @Expose
     private String status;
-    public Login getLogin() {
+    public String getData() {
         return data;
     }
-    public void setLogin(Login data) {
+    public void setData(String data) {
         this.data = data;
     }
     public String getMessage() {

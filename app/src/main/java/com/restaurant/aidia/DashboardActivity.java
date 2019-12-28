@@ -1,6 +1,7 @@
 package com.restaurant.aidia;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,6 +82,9 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+             case R.id.menu_account:
+                startActivity(new Intent(DashboardActivity.this, ProfileActivity.class));
+                break;
             case R.id.menu_logout:
                 session.logoutUser();
                 break;
